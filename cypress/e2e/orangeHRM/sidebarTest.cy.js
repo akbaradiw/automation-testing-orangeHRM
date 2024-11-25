@@ -11,7 +11,6 @@ describe('Sidebar Test', () => {
         cy.wait(["@shortcut", "@actionSummary"]);;
     });
 
-    // data string untuk type menu
     const menus = [
         'Dashboard',
         'PIM',
@@ -27,7 +26,6 @@ describe('Sidebar Test', () => {
         'Buzz',
     ];
 
-    // looping menu
     menus.forEach((menu) => {
         it(`verify ${menu} menu in search/filter sidebar`, () => {
             cy.get('[placeholder="Search"]').type(menu);
