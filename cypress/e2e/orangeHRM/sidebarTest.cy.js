@@ -1,141 +1,37 @@
 describe('Sidebar Test', () => {
-    it('verify Dashbord menu in search/filter sidebar ', () => {
-        cy.visit('https://opensource-demo.orangehrmlive.com/');   
-        cy.get("h5").contains("Login").should("be.visible").and('have.text', 'Login');
+    beforeEach(() => {
+        cy.visit('https://opensource-demo.orangehrmlive.com/');
+        cy.get('h5').contains('Login').should('be.visible').and('have.text', 'Login');
         cy.get('[class="oxd-text oxd-text--p"]').should('contain.text', 'Username : Admin');
-        cy.get('[name="username"]').should('be.visible').type('Admin');
-        cy.get('[name="password"]').should('be.visible').type('admin123');
-        cy.get('[type="submit"]').should('be.visible').click();
-        cy.get('[alt="client brand banner"]').should('be.visible');
-        cy.get('[placeholder="Search"]').type('Dashboard');
+        cy.get('[name="username"]').type('Admin');
+        cy.get('[name="password"]').type('admin123');
+        cy.intercept("GET","https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/dashboard/shortcuts").as("shortcut");
+        cy.intercept("GET","https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/dashboard/employees/action-summary").as("actionSummary");
+        cy.get('[type="submit"]').click()
+        cy.wait(["@shortcut", "@actionSummary"]);;
     });
 
-    it ('verify PIM menu in search/filter sidebar ', () => {
-        cy.visit('https://opensource-demo.orangehrmlive.com/');   
-        cy.get("h5").contains("Login").should("be.visible").and('have.text', 'Login');
-        cy.get('[class="oxd-text oxd-text--p"]').should('contain.text', 'Username : Admin');
-        cy.get('[name="username"]').should('be.visible').type('Admin');
-        cy.get('[name="password"]').should('be.visible').type('admin123');
-        cy.get('[type="submit"]').should('be.visible').click();
-        cy.get('[alt="client brand banner"]').should('be.visible');
-        cy.get('[placeholder="Search"]').type('PIM');
+    // data string untuk type menu
+    const menus = [
+        'Dashboard',
+        'PIM',
+        'Leave',
+        'Time',
+        'Claim',
+        'Recruitment',
+        'Admin',
+        'Performance',
+        'Directory',
+        'Maintenance',
+        'My Info',
+        'Buzz',
+    ];
+
+    // looping menu
+    menus.forEach((menu) => {
+        it(`verify ${menu} menu in search/filter sidebar`, () => {
+            cy.get('[placeholder="Search"]').type(menu);
+            cy.contains(menu).should('be.visible');
+        });
     });
-
-    it ('verify Leave menu in search/filter sidebar ', () => {
-        cy.visit('https://opensource-demo.orangehrmlive.com/');   
-        cy.get("h5").contains("Login").should("be.visible").and('have.text', 'Login');
-        cy.get('[class="oxd-text oxd-text--p"]').should('contain.text', 'Username : Admin');
-        cy.get('[name="username"]').should('be.visible').type('Admin');
-        cy.get('[name="password"]').should('be.visible').type('admin123');
-        cy.get('[type="submit"]').should('be.visible').click();
-        cy.get('[alt="client brand banner"]').should('be.visible');
-        cy.get('[placeholder="Search"]').type('Leave');
-    });
-
-    it ('verify Time menu in search/filter sidebar ', () => {
-        cy.visit('https://opensource-demo.orangehrmlive.com/');   
-        cy.get("h5").contains("Login").should("be.visible").and('have.text', 'Login');
-        cy.get('[class="oxd-text oxd-text--p"]').should('contain.text', 'Username : Admin');
-        cy.get('[name="username"]').should('be.visible').type('Admin');
-        cy.get('[name="password"]').should('be.visible').type('admin123');
-        cy.get('[type="submit"]').should('be.visible').click();
-        cy.get('[alt="client brand banner"]').should('be.visible');
-        cy.get('[placeholder="Search"]').type('Time');
-    });
-
-    it ('verify Claim menu in search/filter sidebar ', () => {
-        cy.visit('https://opensource-demo.orangehrmlive.com/');   
-        cy.get("h5").contains("Login").should("be.visible").and('have.text', 'Login');
-        cy.get('[class="oxd-text oxd-text--p"]').should('contain.text', 'Username : Admin');
-        cy.get('[name="username"]').should('be.visible').type('Admin');
-        cy.get('[name="password"]').should('be.visible').type('admin123');
-        cy.get('[type="submit"]').should('be.visible').click();
-        cy.get('[alt="client brand banner"]').should('be.visible');
-        cy.get('[placeholder="Search"]').type('Claim');
-    });
-
-    it ('verify Recruitment menu in search/filter sidebar ', () => {
-        cy.visit('https://opensource-demo.orangehrmlive.com/');   
-        cy.get("h5").contains("Login").should("be.visible").and('have.text', 'Login');
-        cy.get('[class="oxd-text oxd-text--p"]').should('contain.text', 'Username : Admin');
-        cy.get('[name="username"]').should('be.visible').type('Admin');
-        cy.get('[name="password"]').should('be.visible').type('admin123');
-        cy.get('[type="submit"]').should('be.visible').click();
-        cy.get('[alt="client brand banner"]').should('be.visible');
-        cy.get('[placeholder="Search"]').type('Recruitment');
-    });
-
-    it ('verify Admin menu in search/filter sidebar ', () => {
-        cy.visit('https://opensource-demo.orangehrmlive.com/');   
-
-        cy.get("h5").contains("Login").should("be.visible").and('have.text', 'Login');
-        cy.get('[class="oxd-text oxd-text--p"]').should('contain.text', 'Username : Admin');
-        cy.get('[name="username"]').should('be.visible').type('Admin');
-        cy.get('[name="password"]').should('be.visible').type('admin123');
-        cy.get('[type="submit"]').should('be.visible').click();
-        cy.get('[alt="client brand banner"]').should('be.visible');
-        cy.get('[placeholder="Search"]').type('Admin');
-    });
-
-    it ('verify Performance menu in search/filter sidebar ', () => {
-        cy.visit('https://opensource-demo.orangehrmlive.com/');   
-        cy.get("h5").contains("Login").should("be.visible").and('have.text', 'Login');
-        cy.get('[class="oxd-text oxd-text--p"]').should('contain.text', 'Username : Admin');
-        cy.get('[name="username"]').should('be.visible').type('Admin');
-        cy.get('[name="password"]').should('be.visible').type('admin123');
-        cy.get('[type="submit"]').should('be.visible').click();
-        cy.get('[alt="client brand banner"]').should('be.visible');
-        cy.get('[placeholder="Search"]').type('Performance');
-    });
-
-
-    it ('verify Directory menu in search/filter sidebar ', () => {
-        cy.visit('https://opensource-demo.orangehrmlive.com/');   
-        cy.get("h5").contains("Login").should("be.visible").and('have.text', 'Login');
-        cy.get('[class="oxd-text oxd-text--p"]').should('contain.text', 'Username : Admin');
-        cy.get('[name="username"]').should('be.visible').type('Admin');
-        cy.get('[name="password"]').should('be.visible').type('admin123');
-        cy.get('[type="submit"]').should('be.visible').click();
-        cy.get('[alt="client brand banner"]').should('be.visible');
-        cy.get('[placeholder="Search"]').type('Directory');
-    });
-
-    it ('verify Maintenance menu in search/filter sidebar ', () => {
-        cy.visit('https://opensource-demo.orangehrmlive.com/');   
-        cy.get("h5").contains("Login").should("be.visible").and('have.text', 'Login');
-        cy.get('[class="oxd-text oxd-text--p"]').should('contain.text', 'Username : Admin');
-        cy.get('[name="username"]').should('be.visible').type('Admin');
-        cy.get('[name="password"]').should('be.visible').type('admin123');
-        cy.get('[type="submit"]').should('be.visible').click();
-        cy.get('[alt="client brand banner"]').should('be.visible');
-        cy.get('[placeholder="Search"]').type('Maintenance');
-    });
-
-    it ('verify My Info menu in search/filter sidebar ', () => {
-        cy.visit('https://opensource-demo.orangehrmlive.com/');   
-        cy.get("h5").contains("Login").should("be.visible").and('have.text', 'Login');
-        cy.get('[class="oxd-text oxd-text--p"]').should('contain.text', 'Username : Admin');
-        cy.get('[name="username"]').should('be.visible').type('Admin');
-        cy.get('[name="password"]').should('be.visible').type('admin123');
-        cy.get('[type="submit"]').should('be.visible').click();
-        cy.get('[alt="client brand banner"]').should('be.visible');
-        cy.get('[placeholder="Search"]').type('My Info');
-    });
-
-    it ('verify Buzz menu in search/filter sidebar ', () => {
-        cy.visit('https://opensource-demo.orangehrmlive.com/');   
-        cy.get("h5").contains("Login").should("be.visible").and('have.text', 'Login');
-        cy.get('[class="oxd-text oxd-text--p"]').should('contain.text', 'Username : Admin');
-        cy.get('[name="username"]').should('be.visible').type('Admin');
-        cy.get('[name="password"]').should('be.visible').type('admin123');
-        cy.get('[type="submit"]').should('be.visible').click();
-        cy.get('[alt="client brand banner"]').should('be.visible');
-        cy.get('[placeholder="Search"]').type('Buzz');
-    });
-
-
-
-
 });
-
-    
