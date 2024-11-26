@@ -1,14 +1,15 @@
+import LoginPom from "../../pom/Login.cy.js";
+
 describe('Sidebar Test', () => {
     beforeEach(() => {
-        cy.visit('https://opensource-demo.orangehrmlive.com/');
-        cy.get('h5').contains('Login').should('be.visible').and('have.text', 'Login');
-        cy.get('[class="oxd-text oxd-text--p"]').should('contain.text', 'Username : Admin');
-        cy.get('[name="username"]').type('Admin');
-        cy.get('[name="password"]').type('admin123');
+        LoginPom.visitLoginPage();
+        LoginPom.verifyLoginHeader();
+        LoginPom.inputUsername().type("Admin");
+        LoginPom.inputPassword().type("admin123");
         cy.intercept("GET","https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/dashboard/shortcuts").as("shortcut");
         cy.intercept("GET","https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/dashboard/employees/action-summary").as("actionSummary");
-        cy.get('[type="submit"]').click()
-        cy.wait(["@shortcut", "@actionSummary"]);;
+        LoginPom.loginButton().should("be.visible").click();
+        cy.wait(["@shortcut", "@actionSummary"]);
     });
 
     const menus = [
