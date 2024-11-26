@@ -1,4 +1,4 @@
-import LoginPom from "../../pom/Login.cy.js";
+import LoginPom from "../../../pom/Login/Login.cy.js";
 
 describe("Login Feature", () => {
   beforeEach(() => {
