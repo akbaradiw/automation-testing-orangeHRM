@@ -15,27 +15,38 @@ export default class UserMngPom {
   }
 
   static searchEmployee() {
-    return cy.get('[placeholder="Type for hints..."]')
+    return cy.get('[placeholder="Type for hints..."]');
   }
-
-  static selectUseRole() {
-    return cy.get('.oxd-select-text').first().click().get('.oxd-select-dropdown').contains(role).click
-  }
-  
 
   static searchButton() {
     return cy.get('[type="submit"]').click();
   }
 
   static recordFound() {
-    return cy.get('[class="oxd-text oxd-text--span"]')
-    .contains("(1) Record Found")
-    .should("be.visible");
+    return cy
+      .get('[class="oxd-text oxd-text--span"]')
+      .contains("(1) Record Found")
+      .should("be.visible");
   }
 
   static recordNotFound() {
-    return cy.get('[class="oxd-text oxd-text--span"]')
-    .contains("No Records Found")
-    .should("be.visible");
+    return cy
+      .get('[class="oxd-text oxd-text--span"]')
+      .contains("No Records Found")
+      .should("be.visible");
+  }
+  static deleteUser() {
+    return cy.get('[class="oxd-icon bi-trash"]').eq(0).click();
+  }
+
+  static deleteAllUser() {
+    return cy
+      .get('[class="oxd-icon bi-check oxd-checkbox-input-icon"]')
+      .eq(0)
+      .click()
+      .get(
+        '[class="oxd-button oxd-button--medium oxd-button--label-danger orangehrm-horizontal-margin"]'
+      )
+      .click();
   }
 }
