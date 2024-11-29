@@ -23,25 +23,25 @@ describe("User Management Feature", () => {
   });
 
 
-  it ("verify Search User with valid data", () => {
+  it ("verify success Search User with valid data", () => {
     UserMngPom.searchButton()
     UserMngPom.recordFound()
 });
 
 
-it ("verify Search User with invalid data", () => {
+it ("verify failed Search User with invalid data", () => {
   UserMngPom.searchUsername().should("be.visible").type("kadir");
   UserMngPom.searchButton()
   UserMngPom.recordNotFound()
 });
 
-  it("verify Delete User", () => {
+  it("verify success Delete User", () => {
     UserMngPom.deleteUser()
       .get('[class="oxd-icon bi-trash oxd-button-icon"]')
       .click();
   });
 
-  it("verify Cancel Delete User", () => {
+  it("verify success Cancel Delete User", () => {
     // UserMngPom.clickAdminMenu();
     UserMngPom.deleteUser()
       .get(
@@ -50,7 +50,7 @@ it ("verify Search User with invalid data", () => {
       .click();
   });
 
-  it("verify Delete All User", () => {
+  it("verify success Delete All User", () => {
     UserMngPom.clickAdminMenu();
     UserMngPom.deleteAllUser().get('[class="oxd-icon bi-trash oxd-button-icon"]')
     .click();

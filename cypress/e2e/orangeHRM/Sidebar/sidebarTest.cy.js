@@ -28,7 +28,7 @@ describe('Sidebar Test', () => {
     ];
 
     menus.forEach((menu) => {
-        it(`verify ${menu} menu in search/filter sidebar`, () => {
+        it(`verify success  ${menu} find menu in search/filter sidebar`, () => {
             cy.get('[placeholder="Search"]').type(menu);
             cy.contains(menu).should('be.visible');
         });

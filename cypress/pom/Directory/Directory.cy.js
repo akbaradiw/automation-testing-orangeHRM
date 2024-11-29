@@ -16,7 +16,7 @@ export default class DirectoryPom {
   }
 
   static selectChiefFinancialOfficer() {
-    return cy.get('[class="oxd-select-option"]').eq(2).click();
+    return cy.get('[class="oxd-select-option"]').eq(4).click();
   }
 
   static selectLocation() {
@@ -25,15 +25,19 @@ export default class DirectoryPom {
   }
 
   static selectNewYork() {
-    return cy.get('[class="oxd-select-option"]').eq(2).click();
+    return cy.get('[class="oxd-select-option"]').eq(3
+    ).click();
   }
 
   static searchButton() {
     return cy.get('[type="submit"]').click();
   }
 
-  static resetButton() {
-    return cy.get('[type="reset"]').click();
+  static peterImage() {
+    return cy.get('[ src="/web/index.php/pim/viewPhoto/empNumber/3"]').should("be.visible");
   }
-  
-}
+
+  static saniaImage() {
+    return cy.get('[ src="/web/index.php/pim/viewPhoto/empNumber/22"]').should("be.visible");
+
+  } }

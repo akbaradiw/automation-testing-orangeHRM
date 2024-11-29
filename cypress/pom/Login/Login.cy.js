@@ -25,4 +25,9 @@ export default class LoginPom {
   static invalidCredentials() {
     return cy.get("p").contains("Invalid credentials").should("exist");
   }
+
+  static requiredField() {
+    return cy.get  ('[class="oxd-text oxd-text--span oxd-input-field-error-message oxd-input-group__message"]').should("be.visible");
+
+  }
 }

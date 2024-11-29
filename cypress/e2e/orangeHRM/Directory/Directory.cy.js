@@ -21,22 +21,50 @@ describe("Directory Feature", () => {
     DirectoryPom.closeSidebar();
   });
 
-
-  it("Verify Search/filter Employee with valid data", () => {
-    DirectoryPom.searchEmployee().type("Peter Mac Anderson");
+  it("Verify Success Search employee, filter job role, & location with valid data", () => {
+    DirectoryPom.searchEmployee().type("Peter");
+    cy.wait(2000);
+    cy.get('div[role="listbox"]').first().click();
     DirectoryPom.selectJobRole();
-    DirectoryPom.selectChiefFinancialOfficer();
+    DirectoryPom.selectChiefFinancialOfficer()
     DirectoryPom.selectLocation();
     DirectoryPom.selectNewYork();
+    cy.wait(1000);
+    DirectoryPom.searchButton();
+    DirectoryPom.peterImage();
+  });
+
+  it("Verify Success Search employee with valid data", () => {
+    DirectoryPom.searchEmployee().type("Peter");
+    cy.wait(2000);
+    cy.get('div[role="listbox"]').first().click();
+    DirectoryPom.searchButton();
+    DirectoryPom.peterImage();
+  });
+
+  it("Verify Failed Search employee with invalid data", () => {
+    DirectoryPom.searchEmployee().type("Jokowi");
+    cy.wait(2000);
+    cy.get('div[role="listbox"]').first().click();
     DirectoryPom.searchButton();
   });
 
-  it("Verify Reset Search/filter Employee Input Form", () => {
-    DirectoryPom.searchEmployee().type("Peter Mac Anderson");
+  it("Verify Success filter job role", () => {
     DirectoryPom.selectJobRole();
-    DirectoryPom.selectChiefFinancialOfficer();
+   DirectoryPom.selectChiefFinancialOfficer();
+    DirectoryPom.searchButton();
+    DirectoryPom.peterImage();
+
+  });
+
+  it("Verify Success filter location", () => {
     DirectoryPom.selectLocation();
     DirectoryPom.selectNewYork();
-    DirectoryPom.resetButton();
+    DirectoryPom.searchButton();
+    cy.get(
+      '[class="oxd-text oxd-text--p orangehrm-directory-card-description --break-words"]'
+    ).should("be.visible");
+    DirectoryPom.peterImage();
+    DirectoryPom.saniaImage();
   });
 });
