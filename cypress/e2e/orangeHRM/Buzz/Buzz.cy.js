@@ -1,7 +1,7 @@
 import LoginPom from "../../../pom/Login/Login.cy.js";
 import BuzzPom from "../../../pom/Buzz/Buzz.cy.js";
 
-describe("Directory Feature", () => {
+describe("Buzz Feature", () => {
   beforeEach(() => {
     LoginPom.visitLoginPage();
     // LoginPom.verifyLoginHeader();
