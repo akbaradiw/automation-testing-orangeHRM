@@ -1,5 +1,5 @@
 import LoginPom from "../../../pom/Login/Login.cy.js";
-import ForgotPasswordPom from "../../../pom/ForgotPassword/forgotPasswordPom.cy.js";
+import ForgotPasswordPom from "../../../pom/ForgotPassword/ForgotPassword.cy.js";
 
 describe("Forgot Password Featture", () => {
     beforeEach(() => {

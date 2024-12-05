@@ -21,7 +21,7 @@ describe("Directory Feature", () => {
     DirectoryPom.closeSidebar();
   });
 
-  it("Verify Success Search employee, filter job role, & location with valid data", () => {
+  it("User Search/Filter with valid employee name, job title, and location.", () => {
     DirectoryPom.searchEmployee().type("Peter");
     cy.wait(2000);
     cy.get('div[role="listbox"]').first().click();
@@ -34,7 +34,7 @@ describe("Directory Feature", () => {
     DirectoryPom.peterImage();
   });
 
-  it("Verify Success Search employee with valid data", () => {
+  it("User Verify Success Search/Filter with valid employee name", () => {
     DirectoryPom.searchEmployee().type("Peter");
     cy.wait(2000);
     cy.get('div[role="listbox"]').first().click();
@@ -42,14 +42,14 @@ describe("Directory Feature", () => {
     DirectoryPom.peterImage();
   });
 
-  it("Verify Failed Search employee with invalid data", () => {
+  it("User Verify Failed Search employee with invalid data", () => {
     DirectoryPom.searchEmployee().type("Jokowi");
     cy.wait(2000);
     cy.get('div[role="listbox"]').first().click();
     DirectoryPom.searchButton();
   });
 
-  it("Verify Success filter job role", () => {
+  it("User Verify Success Search/Filter with valid job title", () => {
     DirectoryPom.selectJobRole();
    DirectoryPom.selectChiefFinancialOfficer();
     DirectoryPom.searchButton();
@@ -57,7 +57,7 @@ describe("Directory Feature", () => {
 
   });
 
-  it("Verify Success filter location", () => {
+  it("User Verify Success Search/Filter with valid location", () => {
     DirectoryPom.selectLocation();
     DirectoryPom.selectNewYork();
     DirectoryPom.searchButton();
